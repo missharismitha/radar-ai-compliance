@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VoiceRouteImport } from './routes/voice'
 import { Route as ResultsRouteImport } from './routes/results'
 import { Route as ChatRouteImport } from './routes/chat'
 import { Route as AssessmentRouteImport } from './routes/assessment'
 import { Route as IndexRouteImport } from './routes/index'
 
+const VoiceRoute = VoiceRouteImport.update({
+  id: '/voice',
+  path: '/voice',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResultsRoute = ResultsRouteImport.update({
   id: '/results',
   path: '/results',
@@ -40,12 +46,14 @@ export interface FileRoutesByFullPath {
   '/assessment': typeof AssessmentRoute
   '/chat': typeof ChatRoute
   '/results': typeof ResultsRoute
+  '/voice': typeof VoiceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/assessment': typeof AssessmentRoute
   '/chat': typeof ChatRoute
   '/results': typeof ResultsRoute
+  '/voice': typeof VoiceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,14 @@ export interface FileRoutesById {
   '/assessment': typeof AssessmentRoute
   '/chat': typeof ChatRoute
   '/results': typeof ResultsRoute
+  '/voice': typeof VoiceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/assessment' | '/chat' | '/results'
+  fullPaths: '/' | '/assessment' | '/chat' | '/results' | '/voice'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/assessment' | '/chat' | '/results'
-  id: '__root__' | '/' | '/assessment' | '/chat' | '/results'
+  to: '/' | '/assessment' | '/chat' | '/results' | '/voice'
+  id: '__root__' | '/' | '/assessment' | '/chat' | '/results' | '/voice'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,10 +76,18 @@ export interface RootRouteChildren {
   AssessmentRoute: typeof AssessmentRoute
   ChatRoute: typeof ChatRoute
   ResultsRoute: typeof ResultsRoute
+  VoiceRoute: typeof VoiceRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/voice': {
+      id: '/voice'
+      path: '/voice'
+      fullPath: '/voice'
+      preLoaderRoute: typeof VoiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/results': {
       id: '/results'
       path: '/results'
@@ -107,6 +124,7 @@ const rootRouteChildren: RootRouteChildren = {
   AssessmentRoute: AssessmentRoute,
   ChatRoute: ChatRoute,
   ResultsRoute: ResultsRoute,
+  VoiceRoute: VoiceRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
