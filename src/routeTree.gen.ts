@@ -9,38 +9,168 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VoiceRouteImport } from './routes/voice'
+import { Route as ResultsRouteImport } from './routes/results'
+import { Route as EmailRouteImport } from './routes/email'
+import { Route as ChatRouteImport } from './routes/chat'
+import { Route as AssessmentRouteImport } from './routes/assessment'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiVoiceBriefingRouteImport } from './routes/api/voice-briefing'
+import { Route as ApiSendReportRouteImport } from './routes/api/send-report'
 
+const VoiceRoute = VoiceRouteImport.update({
+  id: '/voice',
+  path: '/voice',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResultsRoute = ResultsRouteImport.update({
+  id: '/results',
+  path: '/results',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmailRoute = EmailRouteImport.update({
+  id: '/email',
+  path: '/email',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChatRoute = ChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssessmentRoute = AssessmentRouteImport.update({
+  id: '/assessment',
+  path: '/assessment',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiVoiceBriefingRoute = ApiVoiceBriefingRouteImport.update({
+  id: '/api/voice-briefing',
+  path: '/api/voice-briefing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSendReportRoute = ApiSendReportRouteImport.update({
+  id: '/api/send-report',
+  path: '/api/send-report',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/assessment': typeof AssessmentRoute
+  '/chat': typeof ChatRoute
+  '/email': typeof EmailRoute
+  '/results': typeof ResultsRoute
+  '/voice': typeof VoiceRoute
+  '/api/send-report': typeof ApiSendReportRoute
+  '/api/voice-briefing': typeof ApiVoiceBriefingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/assessment': typeof AssessmentRoute
+  '/chat': typeof ChatRoute
+  '/email': typeof EmailRoute
+  '/results': typeof ResultsRoute
+  '/voice': typeof VoiceRoute
+  '/api/send-report': typeof ApiSendReportRoute
+  '/api/voice-briefing': typeof ApiVoiceBriefingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/assessment': typeof AssessmentRoute
+  '/chat': typeof ChatRoute
+  '/email': typeof EmailRoute
+  '/results': typeof ResultsRoute
+  '/voice': typeof VoiceRoute
+  '/api/send-report': typeof ApiSendReportRoute
+  '/api/voice-briefing': typeof ApiVoiceBriefingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/assessment'
+    | '/chat'
+    | '/email'
+    | '/results'
+    | '/voice'
+    | '/api/send-report'
+    | '/api/voice-briefing'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/assessment'
+    | '/chat'
+    | '/email'
+    | '/results'
+    | '/voice'
+    | '/api/send-report'
+    | '/api/voice-briefing'
+  id:
+    | '__root__'
+    | '/'
+    | '/assessment'
+    | '/chat'
+    | '/email'
+    | '/results'
+    | '/voice'
+    | '/api/send-report'
+    | '/api/voice-briefing'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AssessmentRoute: typeof AssessmentRoute
+  ChatRoute: typeof ChatRoute
+  EmailRoute: typeof EmailRoute
+  ResultsRoute: typeof ResultsRoute
+  VoiceRoute: typeof VoiceRoute
+  ApiSendReportRoute: typeof ApiSendReportRoute
+  ApiVoiceBriefingRoute: typeof ApiVoiceBriefingRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/voice': {
+      id: '/voice'
+      path: '/voice'
+      fullPath: '/voice'
+      preLoaderRoute: typeof VoiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/results': {
+      id: '/results'
+      path: '/results'
+      fullPath: '/results'
+      preLoaderRoute: typeof ResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/email': {
+      id: '/email'
+      path: '/email'
+      fullPath: '/email'
+      preLoaderRoute: typeof EmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chat': {
+      id: '/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof ChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assessment': {
+      id: '/assessment'
+      path: '/assessment'
+      fullPath: '/assessment'
+      preLoaderRoute: typeof AssessmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +178,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/voice-briefing': {
+      id: '/api/voice-briefing'
+      path: '/api/voice-briefing'
+      fullPath: '/api/voice-briefing'
+      preLoaderRoute: typeof ApiVoiceBriefingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/send-report': {
+      id: '/api/send-report'
+      path: '/api/send-report'
+      fullPath: '/api/send-report'
+      preLoaderRoute: typeof ApiSendReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AssessmentRoute: AssessmentRoute,
+  ChatRoute: ChatRoute,
+  EmailRoute: EmailRoute,
+  ResultsRoute: ResultsRoute,
+  VoiceRoute: VoiceRoute,
+  ApiSendReportRoute: ApiSendReportRoute,
+  ApiVoiceBriefingRoute: ApiVoiceBriefingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

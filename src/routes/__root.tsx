@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { TopNav } from "@/components/TopNav";
 
 function NotFoundComponent() {
   return (
@@ -72,11 +73,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "RADAR — AI Regulatory Due Diligence" },
+      { name: "description", content: "RADAR analyses your AI policy against EU AI Act obligations and produces a gap report, risk memo and remediation tickets." },
+      { name: "author", content: "RADAR" },
+      { property: "og:title", content: "RADAR — AI Regulatory Due Diligence" },
+      { property: "og:description", content: "EU AI Act compliance gap reports powered by a real Dify multi-agent workflow." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
@@ -113,7 +114,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <div className="min-h-screen bg-radar-gradient">
+        <TopNav />
+        <Outlet />
+      </div>
     </QueryClientProvider>
   );
 }
