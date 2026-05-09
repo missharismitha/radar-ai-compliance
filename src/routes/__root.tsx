@@ -113,7 +113,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <div className="min-h-screen bg-radar-gradient">
+        <TopNav />
+        <Outlet />
+      </div>
     </QueryClientProvider>
   );
 }
