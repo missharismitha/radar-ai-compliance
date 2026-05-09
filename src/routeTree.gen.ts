@@ -15,6 +15,7 @@ import { Route as EmailRouteImport } from './routes/email'
 import { Route as ChatRouteImport } from './routes/chat'
 import { Route as AssessmentRouteImport } from './routes/assessment'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiVoiceBriefingRouteImport } from './routes/api/voice-briefing'
 
 const VoiceRoute = VoiceRouteImport.update({
   id: '/voice',
@@ -46,6 +47,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiVoiceBriefingRoute = ApiVoiceBriefingRouteImport.update({
+  id: '/api/voice-briefing',
+  path: '/api/voice-briefing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/email': typeof EmailRoute
   '/results': typeof ResultsRoute
   '/voice': typeof VoiceRoute
+  '/api/voice-briefing': typeof ApiVoiceBriefingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/email': typeof EmailRoute
   '/results': typeof ResultsRoute
   '/voice': typeof VoiceRoute
+  '/api/voice-briefing': typeof ApiVoiceBriefingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,12 +79,27 @@ export interface FileRoutesById {
   '/email': typeof EmailRoute
   '/results': typeof ResultsRoute
   '/voice': typeof VoiceRoute
+  '/api/voice-briefing': typeof ApiVoiceBriefingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/assessment' | '/chat' | '/email' | '/results' | '/voice'
+  fullPaths:
+    | '/'
+    | '/assessment'
+    | '/chat'
+    | '/email'
+    | '/results'
+    | '/voice'
+    | '/api/voice-briefing'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/assessment' | '/chat' | '/email' | '/results' | '/voice'
+  to:
+    | '/'
+    | '/assessment'
+    | '/chat'
+    | '/email'
+    | '/results'
+    | '/voice'
+    | '/api/voice-briefing'
   id:
     | '__root__'
     | '/'
@@ -85,6 +108,7 @@ export interface FileRouteTypes {
     | '/email'
     | '/results'
     | '/voice'
+    | '/api/voice-briefing'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -94,6 +118,7 @@ export interface RootRouteChildren {
   EmailRoute: typeof EmailRoute
   ResultsRoute: typeof ResultsRoute
   VoiceRoute: typeof VoiceRoute
+  ApiVoiceBriefingRoute: typeof ApiVoiceBriefingRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -140,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/voice-briefing': {
+      id: '/api/voice-briefing'
+      path: '/api/voice-briefing'
+      fullPath: '/api/voice-briefing'
+      preLoaderRoute: typeof ApiVoiceBriefingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -150,6 +182,7 @@ const rootRouteChildren: RootRouteChildren = {
   EmailRoute: EmailRoute,
   ResultsRoute: ResultsRoute,
   VoiceRoute: VoiceRoute,
+  ApiVoiceBriefingRoute: ApiVoiceBriefingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
