@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VoiceRouteImport } from './routes/voice'
 import { Route as ResultsRouteImport } from './routes/results'
+import { Route as EmailRouteImport } from './routes/email'
 import { Route as ChatRouteImport } from './routes/chat'
 import { Route as AssessmentRouteImport } from './routes/assessment'
 import { Route as IndexRouteImport } from './routes/index'
@@ -23,6 +24,11 @@ const VoiceRoute = VoiceRouteImport.update({
 const ResultsRoute = ResultsRouteImport.update({
   id: '/results',
   path: '/results',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmailRoute = EmailRouteImport.update({
+  id: '/email',
+  path: '/email',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChatRoute = ChatRouteImport.update({
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/assessment': typeof AssessmentRoute
   '/chat': typeof ChatRoute
+  '/email': typeof EmailRoute
   '/results': typeof ResultsRoute
   '/voice': typeof VoiceRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/assessment': typeof AssessmentRoute
   '/chat': typeof ChatRoute
+  '/email': typeof EmailRoute
   '/results': typeof ResultsRoute
   '/voice': typeof VoiceRoute
 }
@@ -60,21 +68,30 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/assessment': typeof AssessmentRoute
   '/chat': typeof ChatRoute
+  '/email': typeof EmailRoute
   '/results': typeof ResultsRoute
   '/voice': typeof VoiceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/assessment' | '/chat' | '/results' | '/voice'
+  fullPaths: '/' | '/assessment' | '/chat' | '/email' | '/results' | '/voice'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/assessment' | '/chat' | '/results' | '/voice'
-  id: '__root__' | '/' | '/assessment' | '/chat' | '/results' | '/voice'
+  to: '/' | '/assessment' | '/chat' | '/email' | '/results' | '/voice'
+  id:
+    | '__root__'
+    | '/'
+    | '/assessment'
+    | '/chat'
+    | '/email'
+    | '/results'
+    | '/voice'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AssessmentRoute: typeof AssessmentRoute
   ChatRoute: typeof ChatRoute
+  EmailRoute: typeof EmailRoute
   ResultsRoute: typeof ResultsRoute
   VoiceRoute: typeof VoiceRoute
 }
@@ -93,6 +110,13 @@ declare module '@tanstack/react-router' {
       path: '/results'
       fullPath: '/results'
       preLoaderRoute: typeof ResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/email': {
+      id: '/email'
+      path: '/email'
+      fullPath: '/email'
+      preLoaderRoute: typeof EmailRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/chat': {
@@ -123,6 +147,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AssessmentRoute: AssessmentRoute,
   ChatRoute: ChatRoute,
+  EmailRoute: EmailRoute,
   ResultsRoute: ResultsRoute,
   VoiceRoute: VoiceRoute,
 }
