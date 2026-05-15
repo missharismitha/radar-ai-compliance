@@ -77,10 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "RADAR analyses your AI policy against EU AI Act obligations and produces a gap report, risk memo and remediation tickets." },
       { name: "author", content: "RADAR" },
       { property: "og:title", content: "RADAR — AI Regulatory Due Diligence" },
-      { property: "og:description", content: "EU AI Act compliance gap reports powered by a real Dify multi-agent workflow." },
+      { property: "og:description", content: "RADAR analyses your AI policy against EU AI Act obligations and produces a gap report, risk memo and remediation tickets." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "RADAR — AI Regulatory Due Diligence" },
+      { name: "twitter:description", content: "RADAR analyses your AI policy against EU AI Act obligations and produces a gap report, risk memo and remediation tickets." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/75f6fec8-9065-4bdc-b664-f4463a9e1896/id-preview-ff2094e6--bf360714-50c5-4938-9933-ec5c425608d1.lovable.app-1778415959703.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/75f6fec8-9065-4bdc-b664-f4463a9e1896/id-preview-ff2094e6--bf360714-50c5-4938-9933-ec5c425608d1.lovable.app-1778415959703.png" },
     ],
     links: [
       {
